@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio | Feliz Cumpleaños</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+    body, html {
+      margin: 0; padding: 0; width: 100%; height: 100%;
+      overflow-x: hidden; font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a0933, #2d1b4e, #4a2c6d, #6b3fa0);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      color: #fff;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .navbar-cumple {
+      background: rgba(15, 5, 30, 0.85);
+      backdrop-filter: blur(15px);
+      padding: 15px 0;
+      position: fixed; width: 100%; top: 0; z-index: 1000;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      display: flex; justify-content: center;
+    }
+
+    .navbar-cumple a {
+      color: #e0d5f0; text-decoration: none; margin: 0 15px;
+      font-weight: 500; padding: 8px 15px; border-radius: 10px; transition: 0.3s;
+    }
+
+    .navbar-cumple a:hover, .navbar-cumple a.active {
+      color: #ffd700; background: rgba(255, 215, 0, 0.15);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .hero-section {
+      height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      position: relative; text-align: center; padding: 0 20px;
+    }
+
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      z-index: 10;
+      background: linear-gradient(45deg, #fff, #ffd700, #fff);
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s infinite linear;
+      filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+    }
+
+    @keyframes shimmer { to { background-position: 200% center; } }
+
+    .typing-box { margin-top: 20px; font-size: clamp(1rem, 4vw, 1.8rem); min-height: 40px; z-index: 10; }
+
+    .typing-text {
+      border-right: 3px solid #ffd700; white-space: nowrap;
+      overflow: hidden; display: inline-block;
+      animation: typing 4s steps(40) forwards, blink 0.7s infinite;
+    }
+
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    .float-img {
+      position: absolute; width: clamp(90px, 15vw, 140px); height: clamp(90px, 15vw, 140px);
+      border-radius: 50%; border: 3px solid #ffd700; object-fit: cover;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); z-index: 5;
+      animation: floatAnim 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatAnim {
+      from { transform: translateY(0) rotate(-5deg); }
+      to { transform: translateY(-25px) rotate(5deg); }
+    }
+
+    .pos-1 { top: 15%; left: 10%; animation-delay: 0s; }
+    .pos-2 { bottom: 15%; left: 10%; animation-delay: 1s; }
+    .pos-3 { top: 15%; right: 10%; animation-delay: 0.5s; }
+    .pos-4 { bottom: 15%; right: 10%; animation-delay: 1.5s; }
+
+    .star, .music-note { position: absolute; pointer-events: none; }
+    .star { background: #fff; border-radius: 50%; opacity: 0.3; animation: twinkle 3s infinite; }
+    @keyframes twinkle { 50% { opacity: 1; } }
+    
+    .music-note { font-size: 1.5rem; opacity: 0; animation: floatNote 5s linear infinite; z-index: 1; }
+    @keyframes floatNote {
+      0% { transform: translateY(0); opacity: 0; }
+      20% { opacity: 0.6; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+    @media (max-width: 768px) {
+  /* Ajustar el menú para que no se amontone */
+  .navbar-cumple {
+    flex-wrap: wrap; /* Permite que los botones bajen si no caben */
+    padding: 10px 5px;
+  }
+  
+  .navbar-cumple a {
+    margin: 3px;
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+
+  /* Mover las fotos más a las esquinas y hacerlas pequeñas para que no tapen el texto */
+  .float-img {
+    width: 70px; 
+    height: 70px;
+  }
+
+  .pos-1 { top: 12%; left: 5%; }
+  .pos-3 { top: 12%; right: 5%; }
+  .pos-2 { bottom: 8%; left: 5%; }
+  .pos-4 { bottom: 8%; right: 5%; }
+
+  /* Ajustar el título para que no se vea gigante */
+  .main-title {
+    font-size: 2.8rem;
+    line-height: 1.1;
+  }
+
+  /* Corregir el efecto de escritura para que no se corte */
+  .typing-text {
+    white-space: normal; /* Permite que el texto baje de renglón si es necesario */
+    border-right: none;  /* Opcional: quitar el cursor en móvil para evitar saltos visuales */
+    animation: none;     /* La animación de "typing" no funciona bien en multilínea */
+    display: block;
+  }
+}
+.content-wrapper { 
+    z-index: 20; 
+    position: relative; /* Esto asegura que el texto flote sobre las fotos */
+}
+  </style>
+</head>
+<body>
+
+  <nav class="navbar-cumple">
+    <a href="index.html" class="active">Inicio</a>
+    <a href="mas_sobre_ti.html">Más Sobre Ti</a>
+    <a href="junior-h.html">Junior H</a>
+    <a href="carta-especial.html">Carta Especial</a>
+  </nav>
+
+  <main class="hero-section">
+    <div id="star-field"></div>
+    <div id="music-field"></div> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuzvRfFLP4dg7stktuvDws-QUni5Jcxtgpw&s" class="float-img pos-1" alt="Junior H 1">
+    <img src="https://media.timeout.com/images/106063896/750/422/image.jpg" class="float-img pos-2" alt="Junior H 2">
+    <img src="https://www.billboard.com/wp-content/uploads/2025/04/Junior-H-cr-Carlos-Reyes-2025-billboard-1548.jpg" class="float-img pos-3" alt="Junior H 3">
+    <img src="https://media.gq.com.mx/photos/643de9f04ee91f441c9b4aa9/1:1/w_2000,h_2000,c_limit/Junior_H_1479351418.jpg" class="float-img pos-4" alt="Junior H 4">
+
+    <div class="content-wrapper">
+      <h1 class="main-title">✨ Feliz Cumpleaños Brendita ✨</h1>
+      <div style="font-size: 2.5rem; margin: 15px;">💜 💛 💜</div>
+      <div class="typing-box">
+        <span class="typing-text">Esta página es especial... así como tú ✨</span>
+      </div>
+      
+      <p id="instruccion" style="margin-top: 30px; font-size: 0.9rem; color: #ffd700; opacity: 0.7;">
+        (Toca en cualquier parte para la música ✨)
+      </p>
+    </div>
+  </main>
+
+  <audio id="audioPlayer" loop>
+    <source src="las-mananitas.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // 1. Generar estrellas
+    const starContainer = document.getElementById('star-field');
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 3 + 'px';
+      star.style.width = size; star.style.height = size;
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      starContainer.appendChild(star);
+    }
+
+    // 2. Control de Audio e Interacción
+    const audio = document.getElementById('audioPlayer');
+    const instruccion = document.getElementById('instruccion');
+    const musicField = document.getElementById('music-field');
+
+    function iniciarRegalo() {
+      audio.play().then(() => {
+        instruccion.style.opacity = '0';
+        
+        // Crear algunas notas cuando empiece la música
+        const notes = ['♪', '♫', '♬', '🎵'];
+        for (let i = 0; i < 15; i++) {
+          const note = document.createElement('div');
+          note.className = 'music-note';
+          note.textContent = notes[Math.floor(Math.random() * notes.length)];
+          note.style.left = Math.random() * 100 + '%';
+          note.style.bottom = "-50px";
+          note.style.color = '#ffd700';
+          note.style.animationDelay = Math.random() * 5 + 's';
+          musicField.appendChild(note);
+        }
+
+        // Remover eventos para que no se reinicie
+        ['click', 'touchstart', 'scroll'].forEach(evt => {
+          document.removeEventListener(evt, iniciarRegalo);
+        });
+      }).catch(err => console.log("Esperando clic..."));
+    }
+
+    document.addEventListener('click', iniciarRegalo);
+    document.addEventListener('touchstart', iniciarRegalo);
+    document.addEventListener('scroll', iniciarRegalo);
+  </script>
+</body>
+</html>
